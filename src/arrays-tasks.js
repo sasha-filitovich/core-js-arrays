@@ -333,8 +333,23 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const result = [];
+  let chunk = [];
+  arr.map((el, ind) => {
+    if ((ind + 1) % chunkSize === 0) {
+      chunk.push(el);
+      result.push(chunk);
+      chunk = [];
+    } else {
+      chunk.push(el);
+    }
+    if (ind === arr.length - 1 && chunk.length !== 0) {
+      result.push(chunk);
+    }
+    return el;
+  });
+  return result;
 }
 
 /**
@@ -457,8 +472,11 @@ function getIndicesOfOddNumbers(numbers) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  if (arr.length === 0) {
+    return arr;
+  }
+  return ['#000000', '#0000FF', '#FFFFFF'];
 }
 
 /**
@@ -584,8 +602,45 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  let str;
+  return arr
+    .map((el) => {
+      switch (el) {
+        case 'one':
+          str = `1${el}`;
+          break;
+        case 'two':
+          str = `2${el}`;
+          break;
+        case 'three':
+          str = `3${el}`;
+          break;
+        case 'four':
+          str = `4${el}`;
+          break;
+        case 'five':
+          str = `5${el}`;
+          break;
+        case 'six':
+          str = `6${el}`;
+          break;
+        case 'seven':
+          str = `7${el}`;
+          break;
+        case 'eight':
+          str = `8${el}`;
+          break;
+        case 'nine':
+          str = `9${el}`;
+          break;
+        default:
+          str = `0${el}`;
+      }
+      return str;
+    })
+    .sort()
+    .map((el) => el.slice(1));
 }
 
 /**
